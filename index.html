@@ -317,12 +317,12 @@
             carrinho.forEach((item, index) => {
                 const subtotal = item.preco * item.qtd;
                 total += subtotal;
-                listaProdutos += `${index + 1}. ${item.produto} x${item.qtd} - R$${subtotal.toFixed(2).replace('.', ',')}%0A`;
+                listaProdutos += `${index + 1}. ${item.produto} x${item.qtd} - R$${subtotal.toFixed(2).replace('.', ',')}\n`;
             });
 
             let textoObs = "";
             if (observacao && observacao.trim()!== "") {
-                textoObs = `%0A*OBSERVAÇÃO:*%0A${observacao}%0A`;
+                textoObs = `\n*OBSERVAÇÃO:*\n${observacao}\n`;
             }
 
             const texto = `Olá Rafa's Pastel! 🎉 Gostaria de fazer o pedido:
@@ -338,8 +338,7 @@ ${listaProdutos}${textoObs}
 
 Por favor, confirme o pedido! 🙏`;
 
-            const mensagem = encodeURIComponent(texto);
-            const linkWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagem}`;
+            const linkWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(texto)}`;
             window.open(linkWhatsApp, '_blank');
         }
 
