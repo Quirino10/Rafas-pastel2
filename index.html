@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafa's Pastel - Pedidos</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff8f0;
+        }
+        h1 { color: #d35400; text-align: center; margin-bottom: 20px; }
+        h3 { color: #e67e22; margin: 20px 0 10px 0; }
+       .box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+       .dados-cliente span {
+            border-bottom: 1px dashed #ccc;
+            padding: 2px 5px;
+            min-width: 100px;
+            display: inline-block;
+        }
+       .molhos label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+       .produto {
+            background: white;
+            border: 1px solid #f0e0d0;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+       .produto-info h4 { margin-bottom: 5px; color: #333; }
+       .produto-info p { color: #e67e22; font-weight: bold; }
+        button {
+            background: #63e622;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover { background: #d35400; }
+       .btn-secundario { background: #95a5a6; }
+       .btn-secundario:hover { background: #7f8c8d; }
+       .btn-qtd {
+            background: #3498db;
+            padding: 4px 10px;
+            margin: 0 3px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+       .btn-qtd:hover { background: #2980b9; }
+        #btn-enviar-whatsapp {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            background: #25D366;
+            margin-top: 10px;
+        }
+        #btn-enviar-whatsapp:hover { background: #128C7E; }
+       .carrinho { background: #fff3e0; }
+       .carrinho-vazio { color: #999; text-align: center; }
+       .item-carrinho {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0e0d0;
+        }
+       .controles-qtd {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+       .qtd-numero {
+            min-width: 25px;
+            text-align: center;
+            font-weight: bold;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            resize: vertical;
+        }
+       .botoes-carrinho {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🥟 Rafa's Pastel</h1>
+
+        <div class="box dados-cliente">
+        <h3>Seus dados</h3>
+        <p>Nome: <span id="nome-cliente" contenteditable="true">Clique para digitar</span></p>
+        <p>Mesa/Retirada: <span id="numero-mesa" contenteditable="true">1</span></p>
+    </div>
+
+    <div class="box molhos">
+        <h3>Escolha o molho:</h3>
+        <label><input type="radio" name="molho" value="Maionese" checked> Maionese</label>
+        <label><input type="radio" name="molho" value="Ketchup"> Ketchup</label>
+        <label><input type="radio" name="molho" value="Barbecue"> Barbecue</label>
+        <label><input type="radio" name="molho" value="Pimenta"> Pimenta</label>
+        <label><input type="radio" name="molho" 
+value="Todos"> Todos</label>
+        <label><input type="radio" name="molho"
+value="Nenhum"> Nenhum</label>
+    </div>
+    
+    <div class="box acompanhamentos">
+        <h3>Escolha o Acompanhamento:</h3>
+        <label><input type="radio" name="acompanhamento" 
+        value="Verduras" checked> Verduras</label>
+       <p> <label><input type="radio" name="acompanhamento" 
+        value="Legumes"> Legumes</label>
+        <p> <label><input type="radio" name="acompanhamento" 
+        value="Azeitona"> Azeitona</label>
+        <p> <label><input type="radio" name="acompanhamento" 
+        value="Ovo de codorna"> Ovo de codorna</labe> <p>
+        <label><input type="radio" name="acompanhamento" 
+        value="Todos"> Todos</label>
+        <p> <label><input type="radio" name="acompanhamento" 
+        value="Nenhum"> Nenhum</label>
+    </div>
+   
+    <h3>Cardápio</h3>
+    <div class="produto">
+        <div class="produto-info">
+            <h4>Pastel de Carne</h4>
+            <p>R$ 12,50</p>
+        </div>
+        <button class="btn-add-carrinho" data-produto="Pastel de Carne" data-preco="12.50">Adicionar</button>
+    </div>
+
+    <div class="produto">
+        <div class="produto-info">
+            <h4>Pastel de Queijo</h4>
+            <p>R$ 11,00</p>
+        </div>
+        <button class="btn-add-carrinho" data-produto="Pastel de Queijo" data-preco="11.00">Adicionar</button>
+    </div>
+
+<div class="produto">
+        <div class="produto-info">
+            <h4>Pastel de Queijo com Calabresa</h4>
+            <p>R$ 16,00</p>
+        </div>
+        <button class="btn-add-carrinho" data-produto="Pastel de Queijo com Calabresa" data-preco="16.00">Adicionar</button>
+    </div>
+
+    <div class="produto">
+        <div class="produto-info">
+            <h4>Pastel de Frango c/ Catupiry</h4>
+            <p>R$ 13,50</p>
+        </div>
+        <button class="btn-add-carrinho" data-produto="Pastel de Frango c/ Catupiry" data-preco="13.50">Adicionar</button>
+    </div>
+
+    <div class="produto">
+        <div class="produto-info">
+            <h4>Pastel de Pizza</h4>
+            <p>R$ 13,00</p>
+        </div>
+        <button class="btn-add-carrinho" data-produto="Pastel de Pizza" data-preco="13.00">Adicionar</button>
+    </div>
+
+    <div class="produto">
+        <div class="produto-info">
+            <h4>Pastel de Chocolate</h4>
+            <p>R$ 10,00</p>
+        </div>
+        <button class="btn-add-carrinho" data-produto="Pastel de Chocolate" data-preco="10.00">Adicionar</button>
+    </div>
+
+    <div class="produto">
+        <div class="produto-info">
+            <h4>Taxa de Entrega</h4>
+            <p>R$ 3,00</p>
+        </div>
+        <button class="btn-add-carrinho" data-produto="Taxa de Entrega" data-preco="3.00">Adicionar</button>
+    </div>
+
+    <div class="box">
+        <h3>Observações do pedido</h3>
+        <textarea id="observacao" rows="3" placeholder="Ex: Sem cebola, bem passado, troco para R$50..."></textarea>
+    </div>
+
+    <div class="box carrinho">
+        <h3>Seu Carrinho</h3>
+        <div id="lista-carrinho" class="carrinho-vazio">Carrinho vazio</div>
+        <p style="text-align: right; margin-top: 10px;"><strong>Total: R$ <span id="total-carrinho">0,00</span></strong></p>
+        <div class="botoes-carrinho">
+            <button class="btn-secundario" onclick="limparCarrinho()" style="flex:1;">Limpar Carrinho</button>
+        </div>
+    </div>
+
+    <button id="btn-enviar-whatsapp">📱 Enviar Pedido </button>
+
+    <script>
+        // TROQUE PELO NÚMERO REAL: 55 + DDD + número
+        const numeroWhatsApp = "5581981212837";
+        let carrinho = [];
+
+        function adicionarAoCarrinho(produto, preco) {
+            const precoNum = parseFloat(preco);
+            const itemExistente = carrinho.find(item => item.produto === produto);
+
+            if (itemExistente) {
+                itemExistente.qtd += 1;
+            } else {
+                carrinho.push({ produto, preco: precoNum, qtd: 1 });
+            }
+
+            atualizarVisualCarrinho();
+        }
+
+        // Nova função: aumenta qtd
+        function aumentarQtd(index) {
+            carrinho[index].qtd += 1;
+            atualizarVisualCarrinho();
+        }
+
+        // Nova função: diminui qtd ou remove se chegar a 0
+        function diminuirQtd(index) {
+            if (carrinho[index].qtd > 1) {
+                carrinho[index].qtd -= 1;
+            } else {
+                // Se qtd = 1, remove o item
+                carrinho.splice(index, 1);
+            }
+            atualizarVisualCarrinho();
+        }
+
+        function limparCarrinho() {
+            if (carrinho.length === 0) return;
+            if (confirm("Tem certeza que quer limpar o carrinho?")) {
+                carrinho = [];
+                atualizarVisualCarrinho();
+            }
+        }
+
+        function atualizarVisualCarrinho() {
+            const lista = document.getElementById('lista-carrinho');
+            const totalSpan = document.getElementById('total-carrinho');
+            let total = 0;
+
+            if (carrinho.length === 0) {
+                lista.innerHTML = '<p class="carrinho-vazio">Carrinho vazio</p>';
+                totalSpan.textContent = '0,00';
+                return;
+            }
+
+            lista.innerHTML = '';
+            carrinho.forEach((item, index) => {
+                const subtotal = item.preco * item.qtd;
+                total += subtotal;
+
+                const div = document.createElement('div');
+                div.className = 'item-carrinho';
+                div.innerHTML = `
+                    <div>
+                        <strong>${item.produto}</strong><br>
+                        <small>R$ ${item.preco.toFixed(2).replace('.', ',')} cada</small>
+                    </div>
+                    <div class="controles-qtd">
+                        <button class="btn-qtd" onclick="diminuirQtd(${index})">-</button>
+                        <span class="qtd-numero">${item.qtd}</span>
+                        <button class="btn-qtd" onclick="aumentarQtd(${index})">+</button>
+                        <span style="margin-left: 10px; font-weight: bold;">R$ ${subtotal.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                `;
+                lista.appendChild(div);
+            });
+
+            totalSpan.textContent = total.toFixed(2).replace('.', ',');
+        }
+
+        function gerarPedidoWhatsApp(molho, mesa, cliente, observacao) {
+            if (carrinho.length === 0) {
+                alert("Carrinho vazio! Adicione produtos antes de enviar.");
+                return;
+            }
+
+            let listaProdutos = "";
+            let total = 0;
+
+            carrinho.forEach((item, index) => {
+                const subtotal = item.preco * item.qtd;
+                total += subtotal;
+                listaProdutos += `${index + 1}. ${item.produto} x${item.qtd} - R$${subtotal.toFixed(2).replace('.', ',')}%0A`;
+            });
+
+            let textoObs = "";
+            if (observacao && observacao.trim()!== "") {
+                textoObs = `%0A*OBSERVAÇÃO:*%0A${observacao}%0A`;
+            }
+
+            const texto = `Olá Rafa's Pastel! 🎉 Gostaria de fazer o pedido:
+
+- NOME DO CLIENTE: ${cliente}
+- MESA/RETIRADA: ${mesa}
+- MOLHO ESCOLHIDO: ${molho}
+
+*ITENS DO PEDIDO:*
+${listaProdutos}${textoObs}
+*TOTAL: R$${total.toFixed(2).replace('.', ',')}*
+
+Por favor, confirme o pedido! 🙏`;
+
+            const mensagem = encodeURIComponent(texto);
+            const linkWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagem}`;
+            window.open(linkWhatsApp, '_blank');
+        }
+
+        // Eventos dos botões
+        document.querySelectorAll('.btn-add-carrinho').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const produto = this.dataset.produto;
+                const preco = this.dataset.preco;
+                adicionarAoCarrinho(produto, preco);
+            });
+        });
+
+        document.getElementById('btn-enviar-whatsapp').addEventListener('click', function() {
+            const molhoSelecionado = document.querySelector('input[name="molho"]:checked')?.value || "Nenhum";
+            const mesa = document.getElementById('numero-mesa').textContent.trim();
+            const cliente = document.getElementById('nome-cliente').textContent.trim();
+            const observacao = document.getElementById('observacao').value.trim();
+
+            if (!cliente || cliente === 'Clique para digitar' ||!mesa) {
+                alert("Preencha seu nome e número da mesa!");
+                return;
+            }
+
+            gerarPedidoWhatsApp(molhoSelecionado, mesa, cliente, observacao);
+        });
+    </script>
+</body>
+</html>
